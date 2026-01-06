@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QuietHub | Playlist</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Sidebar Navigation -->
+     
+    <ul class="sidebar">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="search.html">Search</a></li>
+      <li><a href="discover.html">Discover</a></li>
+      <li><a href="playlist.html" class="active">Playlist</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="setting.html">Setting</a></li>
+    </ul>
+
+    <!-- Main Content -->
+    <main class="content">
+      <header class="top-nav">
+        <span class="tab active">Playlists</span>
+        <span class="tab">Albums</span>
+        <span class="tab">Artists</span>
+        <span class="tab">Downloaded</span>
+      </header>
+
+      <section class="playlist-list">
+        <div class="playlist-item">
+          <div class="thumb"></div>
+          <div>
+            <h3>My Playlist #1</h3>
+            <p>username</p>
+          </div>
+        </div>
+
+        <div class="playlist-item">
+          <div class="thumb"></div>
+          <div>
+            <h3>Now or Never</h3>
+            <p>Zerobaseone</p>
+          </div>
+        </div>
+
+        <div class="playlist-item">
+          <div class="thumb"></div>
+          <div>
+            <h3>Blue Paradise</h3>
+            <p>Zerobaseone</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Music Player -->
+    <footer class="player">
+      <div class="album-art"></div>
+
+      <div class="song-info">
+        <strong>SONG NAME</strong>
+        <span>ARTIST NAME</span>
+        <div class="progress">
+          <input type="range" value="30" />
+        </div>
+      </div>
+
+      <div class="controls">
+        <button>♡</button>
+        <button>⏮</button>
+        <button class="play">▶</button>
+        <button>⏭</button>
+        <button>＋</button>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
