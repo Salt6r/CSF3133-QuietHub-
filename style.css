@@ -47,6 +47,12 @@ body {
   color: black;
 }
 
+.sidebar li a:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
+}
+
 /* ================= MAIN CONTENT ================= */
 .content {
   margin-left: 240px; /* sidebar width + spacing */
@@ -96,6 +102,8 @@ body {
   color: blue;
   text-decoration: underline;
   display: inline-block;
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
 }
 
 .album-title {
@@ -135,6 +143,12 @@ body {
 
 .tab.active {
   background: #b35df1;
+}
+
+.tab:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
 }
 
 /* ================= PLAYLIST ================= */
