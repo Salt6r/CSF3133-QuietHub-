@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QuietHub | Playlist</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- Sidebar Navigation -->
+    <ul class="sidebar">
+      <img src="picture/logo.png" alt="QuietHub">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="playlist.html" class="active">Playlist</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="setting.html">Setting</a></li>
+    </ul>
+
+    <!-- Main Content -->
+    <main class="content">
+      <span class="playlist-logo"><img src="picture/playlist.png" alt="Playlist"></span>
+      <ul class="top-nav">
+        <li><a href="playlist.html" class="tab active">Playlists</a></li>
+        <li><a href="playlist-artist.html" class="tab">Artists</a></li>
+        <li><a href="playlist-albums.html" class="tab">Albums</a></li>
+      </ul>
+
+      <section class="song-list">
+        <h2>Downloaded</h2>
+        <div class="song-item">
+          <a href="mp3/hana.mp3" class="album-link"
+            ><span class="album-cover"
+              ><img src="picture/prezent.png" alt="prezent" /></span
+          ></a>
+          <div>
+            <a href="mp3/hana.mp3" class="album-link"><h4>Hana</h4></a><br />
+            <a href="artist-zerobaseone.html" class="album-link"
+              ><p>Zerobaseone</p></a
+            >
+          </div>
+        </div>
+
+        <div class="song-item">
+          <a href="mp3/blue.mp3" class="album-link"
+            ><span class="album-cover"
+              ><img src="picture/blue-paradise.png" alt="blue paradise" /></span
+          ></a>
+          <div>
+            <a href="mp3/blue.mp3" class="album-link"><h4>Blue</h4></a><br />
+            <a href="artist-zerobaseone.html" class="album-link"
+              ><p>Zerobaseone</p></a
+            >
+          </div>
+        </div>
+
+        <div class="song-item">
+          <a href="mp3/bad-desire.mp3" class="album-link"
+            ><span class="album-cover"
+              ><img src="picture/desire.png" alt="desire" /></span
+          ></a>
+          <div>
+            <a href="mp3/bad-desire.mp3" class="album-link"
+              ><h4>Bad Desire (With Or Without You)</h4></a
+            ><br />
+            <a href="artist-enhypen.html" class="album-link"><p>Enhypen</p></a>
+          </div>
+        </div>
+
+          <div class="song-item">
+            <a href="mp3/into-the-iland.mp3" class="album-link"
+              ><span class="album-cover"
+                ><img src="picture/into-the-iland.png" alt="Into The I-LAND" /></span
+            ></a>
+            <div>
+              <a href="mp3/into-the-iland.mp3" class="album-link"
+                ><h4>Into The I-LAND</h4></a
+              ><br />
+              <a href="artist-iu.html" class="album-link"><p>IU</p></a>
+            </div>
+          </div>
+
+          
+        </div>
+      </section>
+    </main>
+
+    <!-- Music Player -->
+    <footer class="player">
+      <div class="album-art"></div>
+
+      <div class="song-info">
+        <strong>SONG NAME</strong>
+        <span>ARTIST NAME</span>
+        <div class="progress">
+          <input type="range" value="30" />
+        </div>
+      </div>
+
+      <div class="controls">
+        <button>♡</button>
+        <button>⏮</button>
+        <button class="play">▶</button>
+        <button>⏭</button>
+        <button>＋</button>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

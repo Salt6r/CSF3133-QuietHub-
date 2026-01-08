@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QuietHub | Playlist</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- Sidebar Navigation -->
+    <ul class="sidebar">
+      <img src="picture/logo.png" alt="QuietHub">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="playlist.html" class="active">Playlist</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="setting.html">Setting</a></li>
+    </ul>
+
+    <!-- Main Content -->
+    <main class="content">
+      <span class="playlist-logo"><img src="picture/playlist.png" alt="Playlist"></span>
+      <ul class="top-nav">
+        <li><a href="playlist.html" class="tab">Playlists</a></li>
+        <li><a href="playlist-artist.html" class="tab active">Artists</a></li>
+        <li><a href="playlist-albums.html" class="tab">Albums</a></li>
+      </ul>
+
+      <section class="playlist-list">
+        <div class="playlist-item">
+          <a href="artist-zerobaseone.html" class="album-link"><span class="album-cover"><img src="picture/artist-zerobaseone.jpg" alt="Zerobaseone"></span></a>
+          <div>
+            <a href="artist-zerobaseone.html" class="album-link"><strong class="album-title">Zerobaseone</strong></a>
+          </div>
+        </div>
+
+        <div class="playlist-item">
+          <a href="artist-enhypen.html" class="album-link"><span class="album-cover"><img src="picture/artist-enhypen.jpg" alt="Enhypen"></span></a>
+          <div>
+            <a href="artist-enhypen.html" class="album-link"><strong class="album-title">Enhypen</strong></a>
+          </div>
+        </div>
+
+        <div class="playlist-item">
+          <a href="artist-iu.html" class="album-link"><span class="album-cover"><img src="picture/artist-iu.jpg" alt="iu"></span></a>
+          <div><a href="artist-iu.html" class="album-link"><strong class="album-title">IU</strong></a></div>
+        </div>
+
+        
+        </div>
+      </section>
+    </main>
+
+    <!-- Music Player -->
+    <footer class="player">
+      <div class="album-art"></div>
+
+      <div class="song-info">
+        <strong>SONG NAME</strong>
+        <span>ARTIST NAME</span>
+        <div class="progress">
+          <input type="range" value="30" />
+        </div>
+      </div>
+
+      <div class="controls">
+        <button>♡</button>
+        <button>⏮</button>
+        <button class="play">▶</button>
+        <button>⏭</button>
+        <button>＋</button>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
