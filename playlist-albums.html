@@ -52,28 +52,71 @@
           </div>
         </div>
       </section>
+      <div class="player-section">
+        <div class="player-section-layout">
+          <div class="player-section-song-box">
+            <div class="player-section-song-img" id="songImg"></div>
+            <a href="player.html" class="album-link"
+            ><span class="player-section-album-cover"
+              ><img src="picture/prezent.png" alt="prezent" /></span
+          ></a>
+            <a href="mp3/hana.mp3" class="album-link"><h3>Hana</h3></a><br>
+            <a href="artist-zerobaseone.html" class="album-link"
+              ><p>Zerobaseone</p></a
+            >
+
+            <div class="controls">
+              <button onclick="prevSong()">⏮</button>
+              <button onclick="togglePlay()" id="playBtn">▶</button>
+              <button onclick="nextSong()">⏭</button>
+              <button id="favBtn">❤️</button>
+              <button onclick="togglePlaylist()">📄</button>
+              <button onclick="shareSong()">🔗</button>
+            </div>
+
+            <div class="progress-container">
+              <span id="currentTime">0:00</span>
+              <input type="range" id="progress" value="0" />
+              
+            </div>
+
+            <div class="playlist-box" id="playlistBox">
+              <!-- Playlist JS -->
+            </div>
+
+            <audio id="audio"></audio>
+          </div>
+        </div>
+      </div>
     </main>
 
     <!-- Music Player -->
-    <footer class="player">
-      <div class="album-art"></div>
+    <footer class="footer">
+  <div class="footer-container">
 
-      <div class="song-info">
-        <strong>SONG NAME</strong>
-        <span>ARTIST NAME</span>
-        <div class="progress">
-          <input type="range" value="30" />
-        </div>
-      </div>
+    <!-- 1️⃣ LEFT -->
+    <div class="footer-section">
+      <h3>Contact</h3>
+      <p>Email: quiethub@example.com</p>
+      <p>Phone: +60 12-345 6789</p>
+    </div>
 
-      <div class="controls">
-        <button>♡</button>
-        <button>⏮</button>
-        <button class="play">▶</button>
-        <button>⏭</button>
-        <button>＋</button>
-      </div>
-    </footer>
+    <!-- 2️⃣ CENTER -->
+    <div class="footer-section center">
+      <h3>Follow Us</h3>
+      <a href="#">Instagram</a> |
+      <a href="#">Facebook</a> |
+      <a href="#">TikTok</a>
+    </div>
+
+    <!-- 3️⃣ RIGHT -->
+    <div class="footer-section right">
+      <p>© 2026 QuietHub.</p>
+      <p>All rights reserved.</p>
+    </div>
+
+  </div>
+</footer>
 
     <script src="script.js"></script>
   </body>

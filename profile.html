@@ -10,7 +10,7 @@
     <!-- Sidebar Navigation -->
     <!-- Sidebar Navigation -->
     <ul class="sidebar">
-      <img src="picture/logo.png" alt="QuietHub">
+      <img src="picture/logo.png" alt="QuietHub" />
       <li><a href="index.html">Home</a></li>
       <li><a href="playlist.html">Playlist</a></li>
       <li><a href="profile.html" class="active">Profile</a></li>
@@ -19,11 +19,15 @@
 
     <!-- Main Content -->
     <main class="content">
-      <span class="playlist-logo"><img src="picture/profile.png" alt="Profile"></span>
+      <span class="playlist-logo"
+        ><img src="picture/profile.png" alt="Profile"
+      /></span>
       <div class="profile-layout">
         <!-- Profile Card -->
         <section class="profile-card">
-          <div class="avatar"><img src="picture/avatar.png" alt="Profile"></div>
+          <div class="avatar">
+            <img src="picture/avatar.png" alt="Profile" />
+          </div>
           <div class="profile-info">
             <h3>Leo</h3>
             <strong>Sport person</strong>
@@ -45,43 +49,117 @@
       <section class="top-section">
         <div class="top-item">
           <h2>Top Artist</h2>
-          <h3><a href="artist-zerobaseone.html" class="album-link"><p>Zerobaseone</p></a></h3>
-          <a href="artist-zerobaseone.html" class="album-link"><span class="album-cover"><img src="picture/artist-zerobaseone.jpg" alt="prezent"></span></a>
+          <a href="artist-zerobaseone.html" class="album-link"
+            ><span class="album-cover"
+              ><img src="picture/artist-zerobaseone.jpg" alt="prezent" /></span
+          ></a>
+          <h3><a href="artist-zerobaseone.html">Zerobaseone</a>
+          </h3>
         </div>
 
         <div class="top-item">
           <h2>Top Songs</h2>
-          <h3><a href="mp3/hana.mp3" class="album-link"><p>Hana</p></a></h3>
-          <a href="mp3/hana.mp3" class="album-link"><span class="album-cover"><img src="picture/prezent.png" alt="prezent"></span></a>
+          <a href="mp3/hana.mp3" class="album-link"
+            ><span class="album-cover"
+              ><img src="picture/prezent.png" alt="prezent" /></span
+          ></a>
+            <h3><a href="mp3/hana.mp3" class="album-link">Hana</a></h3>
+          
         </div>
 
         <div class="top-item">
           <h2>Top Playlist</h2>
-          <h3><a href="album-prezent.html" class="album-link"><p>Prezent</p></a></h3>
-          <a href="album-prezent.html" class="album-link"><span class="album-cover"><img src="picture/prezent.png" alt="prezent"></span></a>
+          <a href="album-prezent.html" class="album-link"
+            ><span class="album-cover"
+              ><img src="picture/prezent.png" alt="prezent" /></span
+          ></a>
+          <h3><a href="album-prezent.html" class="album-link">Prezent</p></a></h3>
+          
         </div>
       </section>
-    </main>
 
-    <!-- Music Player -->
-    <footer class="player">
-      <div class="album-art"></div>
 
-      <div class="song-info">
-        <strong>SONG NAME</strong>
-        <span>ARTIST NAME</span>
-        <div class="progress">
-          <input type="range" value="30" />
+      <div class="player-section">
+        <div class="player-section-layout">
+          <div class="player-section-song-box">
+  <!-- Album cover -->
+  <a href="player.html?song=Hana&artist=Zerobaseone" class="album-link">
+    <span class="player-section-album-cover">
+      <img src="picture/prezent.png" alt="Hana" />
+    </span>
+  </a>
+
+ <!-- Song title -->
+<a href="player.html?song=Hana&artist=Zerobaseone" class="album-link">
+  <h3 id="songTitle">Hana</h3>
+</a><br>
+
+<!-- Song title -->
+<a href="artist-zerobaseone.html" class="album-link">
+  <p id="songArtist">Zerobaseone</p>
+</a>
+
+
+  <!-- Controls -->
+  <div class="controls">
+          <button onclick="prevSong()">⏮</button>
+          <button onclick="togglePlay()" id="playBtn">▶</button>
+          <button onclick="nextSong()">⏭</button>
+          <button id="favBtn">❤️</button>
+          <button onclick="togglePlaylist()">📄</button>
+          <button onclick="shareSong()">🔗</button>
+        </div>
+
+  <div class="progress-container">
+          <span id="currentTime">0:00</span>
+          <input type="range" id="progress" value="0" />
+          <span id="duration">0:00</span>
+        </div>
+
+  <div class="playlist-box" id="playlistBox"></div>
+
+        <audio id="audio"></audio>
+</div>
+
         </div>
       </div>
+    </main>
 
-      <div class="controls">
-        <button>♡</button>
-        <button>⏮</button>
-        <button class="play">▶</button>
-        <button>⏭</button>
-        <button>＋</button>
+    <footer class="footer">
+      <div class="footer-container">
+        <!-- 1️⃣ LEFT -->
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <p>Email: quiethub@example.com</p>
+          <p>Phone: +60 12-345 6789</p>
+        </div>
+
+        <!-- 2️⃣ CENTER -->
+        <div class="footer-section center">
+          <h3>Follow Us</h3>
+          <a href="#">Instagram</a> | <a href="#">Facebook</a> |
+          <a href="#">TikTok</a>
+        </div>
+
+        <!-- 3️⃣ RIGHT -->
+        <div class="footer-section right">
+          <p>© 2026 QuietHub.</p>
+          <p>All rights reserved.</p>
+        </div>
       </div>
     </footer>
+<script src="script.js"></script>
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const songParam = urlParams.get("song");
+  const artistParam = urlParams.get("artist");
+
+  if (songParam && artistParam && typeof loadSongFromArtist === "function") {
+    loadSongFromArtist(artistParam, songParam);
+  } else {
+    restorePlayerState();
+  }
+</script>
+
   </body>
 </html>
