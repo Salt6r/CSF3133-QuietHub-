@@ -260,3 +260,86 @@ img {
   height: 80px;
   border-radius: 10px;
 }
+
+/* ================= PROFILE LAYOUT ================= */
+.profile-layout {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+/* Profile Card */
+.profile-card {
+  background: #ff9d9d;
+  border-radius: 16px;
+  padding: 25px;
+  display: flex;
+  gap: 20px;
+  width: 420px;
+}
+
+.avatar img{
+  width: 120px;
+  height: 120px;
+}
+
+.profile-info h3 {
+  font-size: 22px;
+  margin-bottom: 6px;
+  color: black;
+}
+
+.profile-info p {
+  font-size: 14px;
+  color: #b3b3b3;
+  margin-bottom: 4px;
+  color: black;
+}
+
+/* ========== ACTION BUTTONS ========== */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.actions button {
+  background: #1db954;
+  border: none;
+  padding: 12px;
+  border-radius: 25px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.actions button:hover {
+  background: #17a64a;
+}
+
+/* ========== TOP SECTION ========== */
+.top-section {
+  display: flex;
+  gap: 40px;
+}
+
+.top-item {
+  background: #ff9d9d;
+  border-radius: 16px;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+}
+
+.top-item h4 {
+  margin-bottom: 15px;
+}
+
+.circle {
+  width: 100px;
+  height: 100px;
+  background: #333;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
