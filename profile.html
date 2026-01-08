@@ -149,17 +149,7 @@
       </div>
     </footer>
 <script src="script.js"></script>
-<script>
-  const urlParams = new URLSearchParams(window.location.search);
-  const songParam = urlParams.get("song");
-  const artistParam = urlParams.get("artist");
 
-  if (songParam && artistParam && typeof loadSongFromArtist === "function") {
-    loadSongFromArtist(artistParam, songParam);
-  } else {
-    restorePlayerState();
-  }
-</script>
 
   </body>
 </html>

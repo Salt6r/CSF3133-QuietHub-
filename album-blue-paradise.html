@@ -64,37 +64,45 @@
       <div class="player-section">
         <div class="player-section-layout">
           <div class="player-section-song-box">
-            <div class="player-section-song-img" id="songImg"></div>
-            <a href="player.html" class="album-link"
-            ><span class="player-section-album-cover"
-              ><img src="picture/prezent.png" alt="prezent" /></span
-          ></a>
-            <a href="mp3/hana.mp3" class="album-link"><h3>Hana</h3></a><br>
-            <a href="artist-zerobaseone.html" class="album-link"
-              ><p>Zerobaseone</p></a
-            >
+  <!-- Album cover -->
+  <a href="player.html?song=Hana&artist=Zerobaseone" class="album-link">
+    <span class="player-section-album-cover">
+      <img src="picture/prezent.png" alt="Hana" />
+    </span>
+  </a>
 
-            <div class="controls">
-              <button onclick="prevSong()">⏮</button>
-              <button onclick="togglePlay()" id="playBtn">▶</button>
-              <button onclick="nextSong()">⏭</button>
-              <button id="favBtn">❤️</button>
-              <button onclick="togglePlaylist()">📄</button>
-              <button onclick="shareSong()">🔗</button>
-            </div>
+ <!-- Song title -->
+<a href="player.html?song=Hana&artist=Zerobaseone" class="album-link">
+  <h3 id="songTitle">Hana</h3>
+</a><br>
 
-            <div class="progress-container">
-              <span id="currentTime">0:00</span>
-              <input type="range" id="progress" value="0" />
-              
-            </div>
+<!-- Song title -->
+<a href="artist-zerobaseone.html" class="album-link">
+  <p id="songArtist">Zerobaseone</p>
+</a>
 
-            <div class="playlist-box" id="playlistBox">
-              <!-- Playlist JS -->
-            </div>
 
-            <audio id="audio"></audio>
-          </div>
+  <!-- Controls -->
+  <div class="controls">
+          <button onclick="prevSong()">⏮</button>
+          <button onclick="togglePlay()" id="playBtn">▶</button>
+          <button onclick="nextSong()">⏭</button>
+          <button id="favBtn">❤️</button>
+          <button onclick="togglePlaylist()">📄</button>
+          <button onclick="shareSong()">🔗</button>
+        </div>
+
+  <div class="progress-container">
+          <span id="currentTime">0:00</span>
+          <input type="range" id="progress" value="0" />
+          <span id="duration">0:00</span>
+        </div>
+
+  <div class="playlist-box" id="playlistBox"></div>
+
+        <audio id="audio"></audio>
+</div>
+
         </div>
       </div>
 
@@ -128,6 +136,7 @@
 
   </div>
 </footer>
+<script src="script.js"></script>
 
     <script src="script.js"></script>
   </body>

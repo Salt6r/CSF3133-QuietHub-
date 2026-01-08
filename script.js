@@ -33,8 +33,14 @@ function loadSong(index) {
   audio.currentTime = 0;
   songTitleEl.innerText = song.title;
   songArtistEl.innerText = song.artist;
-  songImgEl.innerHTML = `<img src="${song.cover}" alt="${song.title}" />`;
+  
+  // Check if songImgEl exists (for player.html)
+  if (songImgEl) {
+    songImgEl.innerHTML = `<img src="${song.cover}" alt="${song.title}" />`;
+  }
+  
   renderPlaylist();
+  savePlayerState();
 }
 
 // ===== PLAY / PAUSE =====
@@ -47,6 +53,7 @@ function togglePlay() {
     playBtn.innerText = "⏸";
   }
   isPlaying = !isPlaying;
+  savePlayerState();
 }
 
 // ===== NEXT / PREV SONG =====
@@ -68,6 +75,8 @@ function prevSong() {
 
 // ===== PLAYLIST RENDER =====
 function renderPlaylist() {
+  if (!playlistBox) return; // Exit if playlist box doesn't exist
+  
   playlistBox.innerHTML = "";
   songs.forEach((song, index) => {
     const div = document.createElement("div");
@@ -83,6 +92,34 @@ function renderPlaylist() {
     };
     playlistBox.appendChild(div);
   });
+}
+
+// ===== TOGGLE PLAYLIST =====
+function togglePlaylist() {
+  if (playlistBox) {
+    playlistBox.classList.toggle("show");
+  }
+}
+
+// ===== SHARE SONG =====
+function shareSong() {
+  const song = songs[currentSongIndex];
+  const shareText = `Check out "${song.title}" by ${song.artist} on QuietHub!`;
+  
+  if (navigator.share) {
+    navigator.share({
+      title: song.title,
+      text: shareText,
+      url: window.location.href
+    }).catch(err => console.log("Share failed:", err));
+  } else {
+    // Fallback: copy to clipboard
+    navigator.clipboard.writeText(shareText).then(() => {
+      alert("Song info copied to clipboard!");
+    }).catch(err => {
+      console.log("Copy failed:", err);
+    });
+  }
 }
 
 // ===== UPDATE PROGRESS BAR =====
@@ -109,8 +146,72 @@ favBtn.addEventListener("click", () => {
   favBtn.classList.toggle("active");
 });
 
-// ===== AUTO NEXT SONG =====
-audio.addEventListener("ended", nextSong);
+// ===== AUTO NEXT SONG (THIS IS KEY!) =====
+audio.addEventListener("ended", () => {
+  nextSong();
+});
 
-// ===== INITIALIZE =====
-loadSong(currentSongIndex);
+// ===== SAVE PLAYER STATE =====
+function savePlayerState() {
+  const state = {
+    currentSongIndex: currentSongIndex,
+    isPlaying: isPlaying,
+    currentTime: audio.currentTime
+  };
+  sessionStorage.setItem("playerState", JSON.stringify(state));
+}
+
+// ===== RESTORE PLAYER STATE =====
+function restorePlayerState() {
+  const savedState = sessionStorage.getItem("playerState");
+  if (savedState) {
+    const state = JSON.parse(savedState);
+    currentSongIndex = state.currentSongIndex || 0;
+    loadSong(currentSongIndex);
+    
+    if (state.currentTime) {
+      audio.currentTime = state.currentTime;
+    }
+    
+    if (state.isPlaying) {
+      audio.play().catch(err => console.log("Auto-play blocked:", err));
+      isPlaying = true;
+      playBtn.innerText = "⏸";
+    }
+  } else {
+    loadSong(currentSongIndex);
+  }
+}
+
+// ===== LOAD SONG FROM ARTIST PAGE =====
+function loadSongFromArtist(artist, songTitle) {
+  const songIndex = songs.findIndex(
+    s => s.artist.toLowerCase() === artist.toLowerCase() && 
+         s.title.toLowerCase() === songTitle.toLowerCase()
+  );
+  
+  if (songIndex !== -1) {
+    currentSongIndex = songIndex;
+    loadSong(currentSongIndex);
+    audio.play().catch(err => console.log("Auto-play blocked:", err));
+    isPlaying = true;
+    playBtn.innerText = "⏸";
+  } else {
+    loadSong(currentSongIndex);
+  }
+}
+
+// ===== SAVE STATE ON PAGE UNLOAD =====
+window.addEventListener("beforeunload", savePlayerState);
+
+// ===== INITIALIZE ON PAGE LOAD =====
+document.addEventListener("DOMContentLoaded", () => {
+  // Only auto-initialize if not using URL parameters
+  const urlParams = new URLSearchParams(window.location.search);
+  const songParam = urlParams.get("song");
+  const artistParam = urlParams.get("artist");
+  
+  if (!songParam && !artistParam) {
+    restorePlayerState();
+  }
+});
