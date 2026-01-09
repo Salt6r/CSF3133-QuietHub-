@@ -90,12 +90,14 @@ body {
   background: url("images/rose.jpg") center / cover;
   margin-bottom: 15px;
 }
-
+.player-section-album-cover {
+  display: flex;
+  justify-content: center;
+}
 .player-section-album-cover img {
   width: 180px;
   height: 180px;
   display: block;
-  align-items: center;
 }
 
 
@@ -407,7 +409,7 @@ img {
 }
 
 .song-box {
-  width: 80%;
+  width: 100%;
   max-width: 700px;
   background: #ffe0f0;
   border-radius: 35px;
@@ -418,10 +420,13 @@ img {
 }
 
 .song-img {
-  height: 280px;
+  width: 100%;
+  max-width: 280px;
+  height: 180px;
   border-radius: 30px;
-  background: url("images/rose.jpg") center / cover;
-  margin-bottom: 15px;
+  object-fit: cover;  /* keeps album art proportional */
+  display: block;
+  margin: 0 auto 15px auto;
 }
 
 .song-box h3 {
@@ -454,13 +459,13 @@ img {
 
 /* Lyrics & related */
 .lyrics-related-wrapper {
+  margin: -40px auto 0 auto;
   display:flex;
   flex-direction:column;
   gap:20px;
   width:95%;
   max-width:1200px;
-  margin:0 auto;
-}
+ }
 
 .lyrics-box {
   background:#ffb3ec;
@@ -470,10 +475,39 @@ img {
   overflow-y:auto;
   width:100%;
   box-sizing:border-box;
+scroll-behavior: smooth;
+}
+.lyrics-box p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 12px;
+line-height: 1.5;
+  transition: color 0.3s, font-weight 0.3s;
 }
 
-.lyrics-box p.current { font-weight:700; color:#a259ff; }
+.lyrics-box p.current {
+  font-weight: 700;
+  color: #a259ff;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 3px 8px;
+ margin-bottom: 8px;
+}
+/* Current lyric highlight (YouTube Music style) */
+#lyricsLines p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 12px;
+  transition: color 0.3s, font-weight 0.3s, background 0.3s;
+}
 
+#lyricsLines p.current {
+  font-weight: 700;
+  color: #a259ff;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 3px 8px;
+}
 .related-box {
   background:#e7b9ff;
   border-radius:30px;
@@ -483,6 +517,7 @@ img {
   overflow-y:hidden;
   width:100%;
   box-sizing:border-box;
+
 }
 
 .related-list { display:flex; gap:15px; flex-wrap:nowrap; align-items:center; padding-bottom:5px; }
