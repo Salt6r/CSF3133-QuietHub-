@@ -290,3 +290,190 @@ function shareSong() {
   if (navigator.share) navigator.share({ title: song.title, text: shareText, url: window.location.href }).catch(err => console.log(err));
   else navigator.clipboard.writeText(shareText).then(() => alert("Song info copied!"));
 }
+
+
+// Profile Button Functions
+
+// 1. Share Namecard - Copy profile link
+function shareNamecard() {
+  const profileUrl = window.location.href;
+  navigator.clipboard.writeText(profileUrl).then(() => {
+    alert('Profile link copied to clipboard!');
+  }).catch(err => {
+    console.error('Failed to copy: ', err);
+    alert('Failed to copy link');
+  });
+}
+
+// 2. Edit Profile - Allow editing name and description
+function editProfile() {
+  const nameElement = document.querySelector('.profile-info h3');
+  const descElement = document.querySelector('.profile-info strong');
+  
+  const currentName = nameElement.textContent;
+  const currentDesc = descElement.textContent;
+  
+  // Create modal for editing
+  const modal = document.createElement('div');
+  modal.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  `;
+  
+  modal.innerHTML = `
+    <div style="background: white; padding: 30px; border-radius: 10px; width: 400px;">
+      <h2 style="margin-bottom: 20px; color: #333;">Edit Profile</h2>
+      <div style="margin-bottom: 15px;">
+        <label style="display: block; margin-bottom: 5px; color: #666;">Name:</label>
+        <input type="text" id="editName" value="${currentName}" 
+               style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;">
+      </div>
+      <div style="margin-bottom: 20px;">
+        <label style="display: block; margin-bottom: 5px; color: #666;">Description:</label>
+        <input type="text" id="editDesc" value="${currentDesc}" 
+               style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;">
+      </div>
+      <div style="display: flex; gap: 10px; justify-content: flex-end;">
+        <button id="cancelEdit" style="padding: 10px 20px; background: #ccc; border: none; border-radius: 5px; cursor: pointer;">Cancel</button>
+        <button id="saveEdit" style="padding: 10px 20px; background: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Save</button>
+      </div>
+    </div>
+  `;
+  
+  document.body.appendChild(modal);
+  
+  // Cancel button
+  document.getElementById('cancelEdit').onclick = () => {
+    document.body.removeChild(modal);
+  };
+  
+  // Save button
+  document.getElementById('saveEdit').onclick = () => {
+    const newName = document.getElementById('editName').value.trim();
+    const newDesc = document.getElementById('editDesc').value.trim();
+    
+    if (newName) nameElement.textContent = newName;
+    if (newDesc) descElement.textContent = newDesc;
+    
+    // Save to localStorage
+    localStorage.setItem('profileName', newName);
+    localStorage.setItem('profileDesc', newDesc);
+    
+    document.body.removeChild(modal);
+    alert('Profile updated successfully!');
+  };
+  
+  // Close on outside click
+  modal.onclick = (e) => {
+    if (e.target === modal) {
+      document.body.removeChild(modal);
+    }
+  };
+}
+
+// 3. Listening History - Redirect to playlist page
+function listeningHistory() {
+  window.location.href = 'playlist.html';
+}
+
+// 4. Subscription - Show dropdown menu
+function showSubscription() {
+  // Get current plan from localStorage (default: free)
+  let currentPlan = localStorage.getItem('subscriptionPlan') || 'free';
+  
+  // Create modal
+  const modal = document.createElement('div');
+  modal.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  `;
+  
+  modal.innerHTML = `
+    <div style="background: white; padding: 30px; border-radius: 10px; width: 450px;">
+      <h2 style="margin-bottom: 20px; color: #333;">Subscription Plan</h2>
+      
+      <div style="margin-bottom: 15px; padding: 20px; border: 2px solid ${currentPlan === 'free' ? '#4CAF50' : '#ddd'}; border-radius: 8px; cursor: pointer;" id="freePlan">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <h3 style="margin: 0 0 10px 0; color: #333;">Free Plan</h3>
+            <p style="margin: 0; color: #666;">Basic features with ads</p>
+            <p style="margin: 5px 0 0 0; font-weight: bold; color: #333;">$0/month</p>
+          </div>
+          <span style="font-size: 24px; display: ${currentPlan === 'free' ? 'block' : 'none'};">✓</span>
+        </div>
+      </div>
+      
+      <div style="margin-bottom: 20px; padding: 20px; border: 2px solid ${currentPlan === 'premium' ? '#4CAF50' : '#ddd'}; border-radius: 8px; cursor: pointer;" id="premiumPlan">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <h3 style="margin: 0 0 10px 0; color: #333;">Premium Plan</h3>
+            <p style="margin: 0; color: #666;">Ad-free, unlimited skips, offline mode</p>
+            <p style="margin: 5px 0 0 0; font-weight: bold; color: #333;">$9.99/month</p>
+          </div>
+          <span style="font-size: 24px; display: ${currentPlan === 'premium' ? 'block' : 'none'};">✓</span>
+        </div>
+      </div>
+      
+      <button id="closeSubscription" style="width: 100%; padding: 12px; background: #666; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">Close</button>
+    </div>
+  `;
+  
+  document.body.appendChild(modal);
+  
+  // Free plan click
+  document.getElementById('freePlan').onclick = () => {
+    localStorage.setItem('subscriptionPlan', 'free');
+    document.body.removeChild(modal);
+    alert('Switched to Free Plan');
+    showSubscription(); // Refresh to show checkmark
+  };
+  
+  // Premium plan click
+  document.getElementById('premiumPlan').onclick = () => {
+    localStorage.setItem('subscriptionPlan', 'premium');
+    document.body.removeChild(modal);
+    alert('Upgraded to Premium Plan!');
+    showSubscription(); // Refresh to show checkmark
+  };
+  
+  // Close button
+  document.getElementById('closeSubscription').onclick = () => {
+    document.body.removeChild(modal);
+  };
+  
+  // Close on outside click
+  modal.onclick = (e) => {
+    if (e.target === modal) {
+      document.body.removeChild(modal);
+    }
+  };
+}
+
+// Load saved profile data on page load
+window.addEventListener('DOMContentLoaded', () => {
+  const savedName = localStorage.getItem('profileName');
+  const savedDesc = localStorage.getItem('profileDesc');
+  
+  if (savedName) {
+    document.querySelector('.profile-info h3').textContent = savedName;
+  }
+  if (savedDesc) {
+    document.querySelector('.profile-info strong').textContent = savedDesc;
+  }
+});
