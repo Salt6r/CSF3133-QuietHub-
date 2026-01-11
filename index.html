@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuietHub | Let's sing and play!</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Sidebar Navigation -->
+  <ul class="sidebar">
+    <img src="picture/logo.png" alt="QuietHub" />
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="playlist.html">Playlist</a></li>
+    <li><a href="profile.html">Profile</a></li>
+    <li><a href="setting.html">Setting</a></li>
+  </ul>
+
+  <!-- Main Content -->
+  <main class="content-home">
+    <span class="playlist-logo"><img src="picture/home.png" alt="Home" /></span>
+
+    <section class="welcome-section">
+      <h2>Welcome back, Leo!</h2>
+      <p>Continue listening to your favorite tunes.</p>
+    </section>
+
+    <section class="recommended-section">
+      <h2>Recommended for You</h2>
+      <div class="recommended-items">
+        <div class="recommended-item">
+          <a href="playlist-myPlaylist.html" class="album-link"><span class="album-cover"><img
+                src="picture/myPlaylist.png" alt="My Playlist" /></span></a>
+
+          <div class="player-section">
+            <div class="player-section-layout">
+              <div class="player-section-song-box">
+                <!-- Album cover -->
+                <a href="player.html?song=Hana&artist=Zerobaseone" class="album-link">
+                  <span class="player-section-album-cover">
+                    <img src="picture/prezent.png" alt="Hana" />
+                  </span>
+                </a>
+
+                <!-- Song title -->
+                <a href="player.html?song=Hana&artist=Zerobaseone" class="album-link">
+                  <h3 id="songTitle">Hana</h3>
+                </a><br>
+
+                <!-- Song title -->
+                <a href="artist-zerobaseone.html" class="album-link">
+                  <p id="songArtist">Zerobaseone</p>
+                </a>
+
+
+                <!-- Controls -->
+                <div class="controls">
+                  <button onclick="prevSong()">⏮</button>
+                  <button onclick="togglePlay()" id="playBtn">▶</button>
+                  <button onclick="nextSong()">⏭</button>
+                  <button id="favBtn">❤️</button>
+                  <button onclick="togglePlaylist()">📄</button>
+                  <button onclick="shareSong()">🔗</button>
+                </div>
+
+                <div class="progress-container">
+                  <span id="currentTime">0:00</span>
+                  <input type="range" id="progress" value="0" />
+                  <span id="duration">0:00</span>
+                </div>
+
+                <div class="playlist-box" id="playlistBox"></div>
+
+                <audio id="audio"></audio>
+              </div>
+
+            </div>
+          </div>
+  </main>
+  <!-- Music Player -->
+  <footer class="footer">
+    <div class="footer-container">
+
+      <!-- 1️⃣ LEFT -->
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p>Email: quiethub@example.com</p>
+        <p>Phone: +60 12-345 6789</p>
+      </div>
+
+      <!-- 2️⃣ CENTER -->
+      <div class="footer-section center">
+        <h3>Follow Us</h3>
+        <a href="#">Instagram</a> |
+        <a href="#">Facebook</a> |
+        <a href="#">TikTok</a>
+      </div>
+
+      <!-- 3️⃣ RIGHT -->
+      <div class="footer-section right">
+        <p>© 2026 QuietHub.</p>
+        <p>All rights reserved.</p>
+      </div>
+
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+
+</html>
