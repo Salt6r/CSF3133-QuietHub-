@@ -477,3 +477,25 @@ window.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.profile-info strong').textContent = savedDesc;
   }
 });
+
+
+function loadSongFromArtist(artist, songTitle) {
+  const songIndex = songs.findIndex(s => s.artist.toLowerCase() === artist.toLowerCase() && s.title.toLowerCase() === songTitle.toLowerCase());
+  if (songIndex !== -1) { currentSongIndex = songIndex; loadSong(currentSongIndex); audio.play().catch(err => console.log(err)); isPlaying = true; playBtn.innerText = "⏸"; }
+  else loadSong(currentSongIndex);
+}
+
+// ===== PLAY SONG DIRECTLY FROM ARTIST PAGE =====
+function playSongDirectly(songTitle, artist) {
+  const songIndex = songs.findIndex(s => s.artist.toLowerCase() === artist.toLowerCase() && s.title.toLowerCase() === songTitle.toLowerCase());
+  if (songIndex !== -1) {
+    currentSongIndex = songIndex;
+    loadSong(currentSongIndex);
+    audio.play().catch(err => console.log(err));
+    isPlaying = true;
+    playBtn.innerText = "⏸";
+    savePlayerState();
+  } else {
+    alert(`Song "${songTitle}" by ${artist} not found in playlist.`);
+  }
+}
