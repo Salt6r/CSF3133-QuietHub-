@@ -87,7 +87,6 @@ body {
 .player-section-song-img {
   width: 100%;
   border-radius: 30px;
-  background: url("images/rose.jpg") center / cover;
   margin-bottom: 15px;
 }
 .player-section-album-cover {
@@ -297,6 +296,41 @@ img {
   width: 100%;
 }
 
+.player-page-layout {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  width: 1000px;
+}
+
+.player-page-song-box {
+  height: 430px;
+  background: #ffe0f0;
+  border-radius: 35px;
+  padding: 60px;
+  text-align: center;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.player-controls button {
+  border: none;
+  background: none;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.player-controls .play {
+  font-size: 8px;
+}
+
+
 /* ================= CONTROLS ================= */
 .controls {
   display: flex;
@@ -441,16 +475,6 @@ img {
   box-sizing: border-box;
 }
 
-.song-img {
-  width: 100%;
-  max-width: 280px;
-  height: 180px;
-  border-radius: 30px;
-  object-fit: cover;  /* keeps album art proportional */
-  display: block;
-  margin: 0 auto 15px auto;
-}
-
 .song-box h3 {
   font-size: 20px;
   font-weight: 700;
@@ -492,8 +516,8 @@ img {
 .lyrics-box {
   background:#ffb3ec;
   border-radius:35px;
-  padding:20px;
-  height:350px;
+  padding:10px;
+  height:230px;
   overflow-y:auto;
   width:100%;
   box-sizing:border-box;
@@ -539,7 +563,32 @@ line-height: 1.5;
   overflow-y:hidden;
   width:100%;
   box-sizing:border-box;
+}
 
+.related-artist {
+  border-radius: 16px;
+  width: 200px;
+  text-align: center;
+  height: 120px;
+}
+
+.related-box {
+  padding-top: 10px;
+  display: flex;
+  gap: 40px;
+}
+
+.related-artist a {
+  text-decoration: none;
+  color: black;
+}
+
+.related-artist :hover{
+  color: blue;
+  text-decoration: underline;
+  display: inline-block;
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
 }
 
 .related-list { display:flex; gap:15px; flex-wrap:nowrap; align-items:center; padding-bottom:5px; }
