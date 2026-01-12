@@ -86,6 +86,19 @@ function loadSong(index) {
   if (albumCoverEl) albumCoverEl.src = song.cover;
   if (songImgEl) songImgEl.innerHTML = `<img src="${song.cover}" alt="${song.title}" />`;
 
+  // Update player section on other pages
+  const playerSectionCover = document.querySelector('.player-section-album-cover img');
+  if (playerSectionCover) {
+    playerSectionCover.src = song.cover;
+    playerSectionCover.alt = song.title;
+  }
+  const playerSectionLinks = document.querySelectorAll('.player-section a.album-link');
+  playerSectionLinks.forEach(link => {
+    if (link.href.includes('player.html')) {
+      link.href = `player.html?song=${encodeURIComponent(song.title)}&artist=${encodeURIComponent(song.artist)}`;
+    }
+  });
+
   renderPlaylist();
   savePlayerState();
 }
@@ -499,3 +512,55 @@ function playSongDirectly(songTitle, artist) {
     alert(`Song "${songTitle}" by ${artist} not found in playlist.`);
   }
 }
+
+// ===== DARK MODE TOGGLE =====
+function toggleDarkMode() {
+  document.body.classList.toggle("dark-mode");
+  const isDarkMode = document.body.classList.contains("dark-mode");
+  localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
+}
+
+// Load dark mode preference on page load
+window.addEventListener("DOMContentLoaded", () => {
+  const darkModeSetting = localStorage.getItem("darkMode");
+
+  if (darkModeSetting === "enabled") {
+    document.body.classList.add("dark-mode");
+    const darkModeToggle = document.getElementById("darkModeToggle");
+    if (darkModeToggle) darkModeToggle.checked = true;
+  }
+});
+
+
+
+// ===== VOLUME CONTROL =====
+function setVolume(value) {
+  audio.volume = value / 100;
+  localStorage.setItem("masterVolume", value);
+  const volValue = document.getElementById("volValue");
+  if (volValue) volValue.innerText = ` ${value}%`;
+}
+// Load volume preference on page load
+window.addEventListener("DOMContentLoaded", () => {
+  const savedVolume = localStorage.getItem("masterVolume");
+  if (savedVolume !== null) {
+    setVolume(savedVolume);
+    const volumeControl = document.getElementById("volumeControl");
+    if (volumeControl) volumeControl.value = savedVolume;
+  }
+});
+
+// Event listeners for dark mode toggle and volume control
+document.addEventListener("DOMContentLoaded", () => {
+  const darkModeToggle = document.getElementById("darkModeToggle");
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener("change", toggleDarkMode);
+  }
+
+  const volumeControl = document.getElementById("volumeControl");
+  if (volumeControl) {
+    volumeControl.addEventListener("input", (e) => {
+      setVolume(e.target.value);
+    });
+  }
+ });
