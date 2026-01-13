@@ -294,9 +294,9 @@ body.dark-mode .top-item h3 a {
 .welcome-section {
   position: relative;
   background-image: url('picture/homePageBG.png');
-  margin-top: 20px;
-  margin-bottom: 40px;
-  padding: 40px;
+  margin-top: 5px;
+  margin-bottom: 30px;
+
   border-radius: 20px;
   color: black;
   background-repeat: no-repeat;
