@@ -49,6 +49,7 @@ const lrcLyricsData = {
   ],
   // ... tambah semua lagu lain ikut format sama
 };
+console.log('Available lyrics:', Object.keys(lrcLyricsData));
 
 // ===== RELATED ARTISTS =====
 const relatedArtists = [
@@ -113,39 +114,55 @@ function updateLyrics(song, artist) {
   const lyricsLines = document.getElementById("lyricsLines");
 
   lastHighlightedIndex = -1; // reset highlight
+  lrcLyrics = []; // ✅ Reset lyrics array
 
-  // Try LRC first
-  loadLrcLyrics(song, artist);
+  // Show loading state
+  lyricsLines.innerHTML = `<p>Loading lyrics...</p>`;
 
-  // fallback
-  if (!lrcLyrics.length && lrcLyricsData[key]) {
-    lrcLyrics = lrcLyricsData[key]; // penting assign ke lrcLyrics
-    lrcLyrics.forEach(line => {
-      const p = document.createElement("p");
-      p.innerText = line.text;
-      lyricsLines.appendChild(p);
-    });
-  } else if (!lrcLyrics.length) {
-    lyricsLines.innerHTML = `<p>Lyrics not available.</p>`;
-  }
+  // Try LRC first, then fallback
+  loadLrcLyrics(song, artist, key, lyricsLines);
 }
 
 // ===== LRC SYSTEM =====
-function loadLrcLyrics(song, artist) {
-  const fileName = `lyrics/${artist}-${song}.lrc`;
+function loadLrcLyrics(song, artist, key, lyricsLines) {
+  // Clean filename: replace spaces with hyphens or underscores
+  const fileName = `lyrics/${artist}-${song}.lrc`.replace(/ /g, '-');
+  
   fetch(fileName)
-    .then(res => res.text())
+    .then(res => {
+      if (!res.ok) throw new Error('LRC file not found');
+      return res.text();
+    })
     .then(text => {
       lrcLyrics = parseLRC(text);
-      const lyricsLines = document.getElementById("lyricsLines");
       lyricsLines.innerHTML = "";
-      lrcLyrics.forEach(line => {
-        const p = document.createElement("p");
-        p.innerText = line.text;
-        lyricsLines.appendChild(p);
-      });
+      
+      if (lrcLyrics.length > 0) {
+        lrcLyrics.forEach(line => {
+          const p = document.createElement("p");
+          p.innerText = line.text;
+          lyricsLines.appendChild(p);
+        });
+      } else {
+        throw new Error('No valid lyrics parsed');
+      }
     })
-    .catch(() => { lrcLyrics = []; });
+    .catch(() => {
+      // ✅ Fallback to hardcoded data
+      console.log(`LRC file not found, using fallback for: ${key}`);
+      lrcLyrics = lrcLyricsData[key] || [];
+      lyricsLines.innerHTML = "";
+      
+      if (lrcLyrics.length > 0) {
+        lrcLyrics.forEach(line => {
+          const p = document.createElement("p");
+          p.innerText = line.text;
+          lyricsLines.appendChild(p);
+        });
+      } else {
+        lyricsLines.innerHTML = `<p>Lyrics not available.</p>`;
+      }
+    });
 }
 
 function parseLRC(text) {
